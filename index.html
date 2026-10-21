@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#15152e">
+  <meta name="description" content="Ruleta interactiva de Verdad o Reto para jugar con amigos.">
+  <title>Ruleta de Verdad o Reto</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <p class="eyebrow">JUEGA CON TUS AMIGOS</p>
+      <h1>🎯 Ruleta de <span>Verdad o Reto</span></h1>
+      <p class="subtitle">Gira, descubre tu opción y ¡que empiece la diversión!</p>
+
+      <label class="language-control" for="languageSelect">
+        Idioma / Language
+        <select id="languageSelect" aria-label="Idioma">
+          <option value="es">🇪🇸 Español</option>
+          <option value="en">🇺🇸 English</option>
+        </select>
+      </label>
+    </header>
+
+    <section class="game-layout" aria-label="Juego de la ruleta">
+      <div class="wheel-card">
+        <div class="wheel-wrap">
+          <div class="pointer" aria-hidden="true"></div>
+          <canvas id="wheel" width="600" height="600"
+            role="img" aria-label="Ruleta interactiva de verdad y reto">
+            Ruleta interactiva.
+          </canvas>
+          <div class="wheel-center" aria-hidden="true">🎲</div>
+        </div>
+
+        <button id="spinBtn" class="primary-btn" type="button">
+          ¡GIRAR LA RULETA!
+        </button>
+
+        <p id="status" class="status" aria-live="polite">
+          Todo listo. Pulsa para girar.
+        </p>
+
+        <button id="skipBtn" class="text-btn" type="button">
+          Pasar turno
+        </button>
+      </div>
+
+      <aside class="result-card" aria-labelledby="resultTitle">
+        <div class="card-heading">
+          <span class="heading-icon">✨</span>
+          <div>
+            <h2 id="resultTitle">Tu resultado</h2>
+            <p>La suerte tiene la palabra</p>
+          </div>
+        </div>
+
+        <div id="resultBox" class="result-box" aria-live="polite">
+          <span class="result-placeholder">
+            Tu verdad o reto aparecerá aquí.
+          </span>
+        </div>
+
+        <div class="legend">
+          <span><i class="dot truth"></i> Verdad</span>
+          <span><i class="dot dare"></i> Reto</span>
+        </div>
+
+        <p class="friendly-note">
+          💜 Recuerda: todos pueden pasar un turno.
+          ¡Lo importante es divertirse con respeto!
+        </p>
+      </aside>
+    </section>
+
+    <section class="settings card" aria-labelledby="settingsTitle">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">PERSONALIZA TU PARTIDA</p>
+          <h2 id="settingsTitle">Opciones y apariencia</h2>
+        </div>
+
+        <button id="toggleSettings" class="secondary-btn"
+          type="button" aria-expanded="true"
+          aria-controls="settingsContent">
+          Ocultar ajustes
+        </button>
+      </div>
+
+      <div id="settingsContent">
+        <div class="options-grid">
+          <section class="option-editor" aria-labelledby="truthTitle">
+            <div class="list-title">
+              <h3 id="truthTitle">💬 Verdades</h3>
+              <span id="truthCount" class="count">5</span>
+            </div>
+
+            <form id="truthForm" class="add-form">
+              <label class="sr-only" for="truthInput">Nueva verdad</label>
+              <input id="truthInput" maxlength="180"
+                placeholder="Escribe una verdad..." autocomplete="off">
+              <button class="add-btn" type="submit"
+                aria-label="Añadir verdad">+</button>
+            </form>
+
+            <ul id="truthList" class="option-list"></ul>
+          </section>
+
+          <section class="option-editor" aria-labelledby="dareTitle">
+            <div class="list-title">
+              <h3 id="dareTitle">⚡ Retos</h3>
+              <span id="dareCount" class="count">5</span>
+            </div>
+
+            <form id="dareForm" class="add-form">
+              <label class="sr-only" for="dareInput">Nuevo reto</label>
+              <input id="dareInput" maxlength="180"
+                placeholder="Escribe un reto..." autocomplete="off">
+              <button class="add-btn" type="submit"
+                aria-label="Añadir reto">+</button>
+            </form>
+
+            <ul id="dareList" class="option-list"></ul>
+          </section>
+        </div>
+
+        <div class="customize">
+          <h3>🎨 Fondos y colores</h3>
+
+          <div class="custom-grid">
+            <label class="control-card">
+              Fondo de la página
+              <input id="pageColor" type="color" value="#15152e">
+            </label>
+
+            <label class="control-card">
+              Color de toda la ruleta
+              <input id="wheelColor" type="color" value="#7667f5">
+            </label>
+
+            <label class="control-card">
+              Imagen para la página
+              <input id="pageImage" type="file" accept="image/*">
+            </label>
+
+            <label class="control-card">
+              Imagen para la ruleta
+              <input id="wheelImage" type="file" accept="image/*">
+            </label>
+          </div>
+
+          <div class="settings-actions">
+            <button id="clearPageImage" class="secondary-btn" type="button">
+              Quitar imagen de página
+            </button>
+
+            <button id="clearWheelImage" class="secondary-btn" type="button">
+              Quitar imagen de ruleta
+            </button>
+
+            <button id="resetBtn" class="secondary-btn" type="button">
+              Restaurar valores iniciales
+            </button>
+          </div>
+
+          <p id="notice" class="notice" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Hecho para compartir buenos momentos.
+      Juega con respeto y sin presiones. 💜
+    </footer>
+  </main>
+
+  <dialog id="editDialog" class="edit-dialog" aria-labelledby="editTitle">
+    <form id="editForm" method="dialog">
+      <h2 id="editTitle">Editar opción</h2>
+      <label for="editInput">Texto de la opción</label>
+      <textarea id="editInput" maxlength="180" rows="3" required></textarea>
+
+      <div class="dialog-actions">
+        <button id="cancelEdit" class="secondary-btn" type="button">
+          Cancelar
+        </button>
+        <button class="primary-btn compact" type="submit">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
